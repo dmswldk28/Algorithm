@@ -1,9 +1,4 @@
 class Solution {
-    /**
-     * 조이스틱을 사용하여 name을 완성하는 최소 조작 횟수를 계산합니다.
-     * @param name 완성해야 할 알파벳 이름
-     * @return 최소 조작 횟수
-     */
     public int solution(String name) {
         int N = name.length();
         int total_change = 0; // 알파벳 상하 변경 조작 횟수의 합
