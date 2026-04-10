@@ -1,44 +1,35 @@
 import java.util.*;
 
 class Solution {
-    static class Process {
-        int index;
-        int priority;
-
-        public Process(int index, int priority) {
-            this.index = index;
-            this.priority = priority;
-        }
-    }
-
     public int solution(int[] priorities, int location) {
-        Queue<Process> queue = new LinkedList<>();
-        
-        for (int i = 0; i < priorities.length; i++) {
-            queue.add(new Process(i, priorities[i]));
+        int answer = 0;
+        int l = location;
+
+        Queue<Integer> que = new LinkedList<>();
+        for (int p : priorities) {
+            que.add(p);
         }
 
         Arrays.sort(priorities);
-        int length = priorities.length;
-        int maxIdx = length - 1;
-        
-        int executeCount = 0;
+        int size = priorities.length - 1;
 
-        while (!queue.isEmpty()) {
-            Process current = queue.poll();
+        while (!que.isEmpty()) {
+            int currentP = que.poll();
 
-            if (current.priority == priorities[maxIdx]) {
-                executeCount++;
-                maxIdx--;
+            if (currentP == priorities[size - answer]) {
+                answer++;
                 
-                if (current.index == location) {
-                    return executeCount;
+                if (l == 0) {
+                    break;
                 }
+                l--;
             } else {
-                queue.add(current);
+                que.add(currentP);
+                
+                l = (l == 0) ? que.size() - 1 : l - 1;
             }
         }
 
-        return executeCount;
+        return answer;
     }
 }
